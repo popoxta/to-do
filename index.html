@@ -3,17 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>doIt</title>
-  <script src="./scripts/index.js" type="module" defer></script>
+
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./scripts/index.js" type="module" defer></script>
+
 </head>
 <body>
 
 <div class="header">
+    <button class="navbar"></button>
+    <div class="title">
+
+        <h1><span>do</span>it</h1>
+
+        <div class="icon"></div>
+    </div>
+</div>
+<div class="content">
+
+    <div class="sidebar">
+        <div class="side-home">
+
+            <h2>home</h2>
+
+            <h3>all</h3>
+            <h3>today</h3>
+            <h3>this week</h3>
+            <h3>important</h3>
+
+        </div>
+
+        <div class="side-projects">
+            <h2>Projects</h2>
+        </div>
+    </div>
+
+    <div class="todo">
+
+        <div class="task-container">
+            <div class="task">
+
+                <div>
+                    <div class="check-box"></div>
+                    <h4>task name</h4>
+                </div>
+
+                <div><p>due o:q
+
+                     n this date</p>
+                    <button class="edit-btn">edit</button>
+                </div>
+
+            </div>
+            <div class="task-info">
+                <p>more info on this task</p>
+                <button>delete</button>
+            </div>
+        </div>
+
+    </div>
 
 </div>
-
-<div class="sidebar"></div>
-
-<div class="body"><div class="todo"></div></div>
 
 </body>
 </html>

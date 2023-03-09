@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+:root {
+    font-family: 'Poppins', sans-serif;
+
+    --black-blue: #0D2A55;
+    --blue: #398BB9;
+    --green-grey: #546D85;
+    --dark-green: #91C3CE;
+    --green: #D6E8EB;
+    --light-green: #F9F9F9;
+
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+
+    min-height: 100%;
+}
+
+.header {
+    background-color: var(--green);
+
+    padding: 0.5rem 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+h1 {
+    font-size: 3rem;
+
+    color: var(--black-blue);
+    margin: 0;
+}
+h1 > span {
+    color: var(--blue)
+}
+
+.navbar {
+    height: 3rem;
+    width: 3rem;
+}
+
+.icon {
+    background-color: white;
+    border-radius: 30px;
+
+    width: 3rem;
+    height: 3rem;
+}
+
+.content {
+    /*border: 1px solid black;*/
+    display: flex;
+}
+.sidebar {
+    background-color: var(--light-green);
+
+    min-width: 20rem;
+    min-height: calc(100vh - 5.5rem);
+
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+}
+.sidebar h2 {
+    color: var(--green-grey);
+    font-size: 1.8rem;
+
+    margin: 0;
+}
+.sidebar h3 {
+    color: var(--black-blue);
+}
+.todo {
+    background-color: white;
+
+    flex: 1;
+}
+
+.task-container {
+    background-color: var(--light-green);
+    border-radius: 10px;
+
+    width: 75%;
+
+    margin: 2rem auto;
+    padding: 1rem;
+}
+.task, .task-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.task-info {
+    padding-top: 0.5rem;
+    padding-left: 2.5rem;
+}
+.task > div:first-child, .task > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.check-box {
+    background-color: var(--green);
+    border-radius: 30px;
+
+    width: 2rem;
+    height: 2rem;
+}
+p, h4 {
+    margin: 0;
+}

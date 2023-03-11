@@ -5,7 +5,7 @@
     <title>doIt</title>
 
     <link rel="stylesheet" href="./styles/styles.css">
-    <script src="./scripts/index.js" type="module" defer></script>
+    <script src="./scripts/todo.js" type="module" defer></script>
 
 </head>
 <body>
@@ -21,24 +21,67 @@
 </div>
 <div class="content">
 
+
+    <!--    <div class="form-body">-->
+    <!--        <div class="form-head"><h4>new project</h4></div>-->
+    <!--        <form>-->
+    <!--            <label for="projectName">project name</label>-->
+    <!--            <input type="text" name="projectName" id="projectName">-->
+
+    <!--            <button type="submit">add</button>-->
+    <!--            <button type="button">cancel</button>-->
+    <!--        </form>-->
+
+    <!--    </div>-->
+
+    <!--    <div class="form-body">-->
+    <!--        <div class="form-head"><h4>new task</h4></div>-->
+    <!--        <form>-->
+    <!--            <label for="taskName">name</label>-->
+    <!--            <input type="text" name="taskName" id="taskName">-->
+
+    <!--            <label for="description">description</label>-->
+    <!--            <textarea name="description" id="description"></textarea>-->
+
+    <!--            <label for="dueDate">due date</label>-->
+    <!--            <input type="date" name="dueDate" id="dueDate">-->
+
+    <!--            <label for="important" class="center">mark important-->
+    <!--            <input type="checkbox" name="important" id="important">-->
+    <!--            </label>-->
+
+    <!--            <button type="submit">add</button>-->
+    <!--            <button type="button">cancel</button>-->
+    <!--        </form>-->
+
+    <!--    </div>-->
+
+
     <div class="sidebar">
         <div class="side-home">
 
             <h2>home</h2>
-
-            <h3>all</h3>
-            <h3>today</h3>
-            <h3>this week</h3>
-            <h3>important</h3>
-
+            <div class="home-items">
+                <h3 class="all">all</h3>
+                <h3 class="today">today</h3>
+                <h3 class="week">this week</h3>
+                <h3 class="important">important</h3>
+            </div>
         </div>
 
         <div class="side-projects">
-            <h2>Projects</h2>
+
+                <h2>projects
+                <button class="add-project">add</button>
+                </h2>
+            <div class="project-items">
+
+            </div>
         </div>
     </div>
 
     <div class="todo">
+
 
         <div class="task-container">
             <div class="task">
@@ -48,16 +91,15 @@
                     <h4>task name</h4>
                 </div>
 
-                <div><p>due o:q
-
-                     n this date</p>
+                <div>
+                    <p>due on this date</p>
                     <button class="edit-btn">edit</button>
                 </div>
 
             </div>
             <div class="task-info">
                 <p>more info on this task</p>
-                <button>delete</button>
+                <button class="delete-btn">delete</button>
             </div>
         </div>
 

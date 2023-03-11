@@ -11,6 +11,7 @@
     --light-green: #F9F9F9;
 
 }
+
 * {
     box-sizing: border-box;
 }
@@ -31,6 +32,7 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+
 .title {
     display: flex;
     align-items: center;
@@ -43,6 +45,7 @@ h1 {
     color: var(--black-blue);
     margin: 0;
 }
+
 h1 > span {
     color: var(--blue)
 }
@@ -61,9 +64,10 @@ h1 > span {
 }
 
 .content {
-    /*border: 1px solid black;*/
+    position: relative;
     display: flex;
 }
+
 .sidebar {
     background-color: var(--light-green);
 
@@ -75,15 +79,18 @@ h1 > span {
     display: flex;
     flex-direction: column;
 }
+
 .sidebar h2 {
     color: var(--green-grey);
     font-size: 1.8rem;
 
     margin: 0;
 }
-.sidebar h3 {
+
+h3 {
     color: var(--black-blue);
 }
+
 .todo {
     background-color: white;
 
@@ -99,27 +106,82 @@ h1 > span {
     margin: 2rem auto;
     padding: 1rem;
 }
+
 .task, .task-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .task-info {
     padding-top: 0.5rem;
     padding-left: 2.5rem;
 }
+
 .task > div:first-child, .task > div:last-child {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+
 .check-box {
     background-color: var(--green);
     border-radius: 30px;
 
-    width: 2rem;
+    min-width: 2rem;
     height: 2rem;
 }
+.done::after {
+    font-size: 1.5rem;
+    content: "✔";
+    padding-left: 0.4rem;
+}
+
 p, h4 {
     margin: 0;
+}
+
+h4 {
+    font-size: 1.3rem;
+}
+
+/*task forms*/
+
+.form-body {
+    background-color: var(--light-green);
+    border: 2px solid gray;
+    border-radius: 10px;
+
+    position: absolute;
+    right: 15rem;
+    top: 2.6rem;
+
+    width: 20rem;
+    height: fit-content;
+
+    overflow: hidden;
+}
+
+.form-head {
+    background-color: var(--green);
+    padding: 0.5rem 1rem;
+}
+
+.form-body > form {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0.5rem 1rem;
+}
+form > label {
+    margin-top: 1rem;
+}
+form > label:first-child {
+    margin-top: 0.5rem;
+}
+.center {
+    margin: 1rem auto auto;
+}
+.selected {
+    color: red;
 }

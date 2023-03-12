@@ -1,6 +1,6 @@
 export {renderContainer, renderTaskForm}
 
-import {allProjects, getCurrentTasks, getSelectedProject, Task} from "../tasks";
+import {allProjects, getCurrentTasks, getSelectedProject, Task, updateLocalStorage} from "../tasks";
 import {renderProjectHeader} from "./projects";
 import {format, formatISO} from "date-fns";
 
@@ -52,6 +52,7 @@ function buildTaskElement(task) {
     checkBox.addEventListener('click', () => {
         task.done = !task.done
         renderContainer()
+        updateLocalStorage()
     })
 
     taskEdit.addEventListener('click', () => renderTaskForm(task))
@@ -72,6 +73,7 @@ function deleteTask(task) {
         }
     }
     renderContainer()
+    updateLocalStorage()
 }
 
 function renderContainer() {
@@ -156,11 +158,13 @@ function renderTaskForm(task) {
         taskForm.addEventListener('submit', e => {
             editTask(e, task)
             renderContainer()
+            updateLocalStorage()
         })
     } else {
         taskForm.addEventListener('submit', e => {
             addTask(e)
             renderContainer()
+            updateLocalStorage()
         })
     }
 

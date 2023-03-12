@@ -1,25 +1,22 @@
-export {selectTaskFilter, initializeFilters}
+export {selectTaskFilter, initializeAllFilters}
 
 import {getAllTasks, setCurrentTasks, setSelectedFilter, setSelectedProject} from "../tasks";
 import {renderContainer} from "./tasks";
 import {isThisWeek, isToday} from "date-fns";
 import {renderProjects} from "./projects";
 
-function initializeFilters() {
-    document.querySelector('.all').addEventListener('click', e => {
-        selectTaskFilter(e.target, () => getAllTasks(), 'all tasks')
-    })
+function initializeAllFilters() {
 
-    document.querySelector('.today').addEventListener('click', e => {
-        selectTaskFilter(e.target, () => getAllTasks().filter((task) => isToday(task.date)), 'today')
-    })
+    initializeFilter('.all', ()=> getAllTasks(), 'all tasks')
+    initializeFilter('.today', () => getAllTasks().filter((task) => isToday(task.date)), 'today')
+    initializeFilter('.week', () => getAllTasks().filter((task) => isThisWeek(task.date)), 'this week')
+    initializeFilter('.important', () => getAllTasks().filter((task) => task.important), 'important')
+    initializeFilter('.completed', () => getAllTasks().filter((task)=> task.done), 'completed')
+}
 
-    document.querySelector('.week').addEventListener('click', e => {
-        selectTaskFilter(e.target, () => getAllTasks().filter((task) => isThisWeek(task.date)), 'this week')
-    })
-
-    document.querySelector('.important').addEventListener('click', e => {
-        selectTaskFilter(e.target, () => getAllTasks().filter((task) => task.important), 'important')
+function initializeFilter(selector, filterFunc, header){
+    document.querySelector(selector).addEventListener('click', e => {
+        selectTaskFilter(e.target, filterFunc, header)
     })
 }
 

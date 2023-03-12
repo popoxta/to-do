@@ -4,6 +4,7 @@ import {removeFilterSelector} from "./filters";
 import {renderContainer, renderTaskForm} from "./tasks";
 import {
     allProjects,
+    updateLocalStorage,
     getSelectedFilter,
     getSelectedProject,
     newProject,
@@ -21,14 +22,12 @@ function renderProjects() {
 
         if (project === getSelectedProject()) projectItem.className = 'selected'
 
-        projectItem.addEventListener('click', () => {
-            removeFilterSelector()
-            setSelectedProject(project)
-            setCurrentTasks(()=> allProjects[project])
+        const deleteButton = document.createElement('button')
+        deleteButton.textContent = 'delete'
+        projectItem.appendChild(deleteButton)
 
-            renderProjects()
-            renderContainer()
-        })
+        deleteButton.addEventListener('click', () => deleteProject(project))
+        projectItem.addEventListener('click', () => openProject(project))
         return projectItem
     })
     document.querySelector('.project-items').replaceChildren(...projectsArray)
@@ -112,10 +111,29 @@ function renderProjectForm() {
         newProject(formData.get('projectName'))
         renderProjects()
         removeForm()
+        updateLocalStorage()
     })
 
     form.append(projectNameLabel, projectName, submitButton, cancelButton)
     projectForm.append(formHead, form)
 
     todoContainer.appendChild(projectForm)
+}
+
+function deleteProject(project){
+    if (!confirm(`Are you sure you would like to delete ${project}?`)) return
+
+    delete allProjects[project]
+    renderProjects()
+    renderContainer()
+    updateLocalStorage()
+}
+
+function openProject(project){
+    removeFilterSelector()
+    setSelectedProject(project)
+    setCurrentTasks(()=> allProjects[project])
+
+    renderProjects()
+    renderContainer()
 }

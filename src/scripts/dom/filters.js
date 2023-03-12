@@ -1,8 +1,9 @@
 export {selectTaskFilter, initializeFilters}
 
-import {getAllTasks, setCurrentTasks, setSelectedFilter, setSelectedProject} from "./tasks";
+import {getAllTasks, setCurrentTasks, setSelectedFilter, setSelectedProject} from "../tasks";
+import {renderContainer} from "./tasks";
 import {isThisWeek, isToday} from "date-fns";
-import {renderProjects, renderContainer} from "./domview";
+import {renderProjects} from "./projects";
 
 function initializeFilters() {
     document.querySelector('.all').addEventListener('click', e => {
@@ -35,7 +36,8 @@ function selectTaskFilter(filterElement, tasks, header) {
 }
 
 export function removeFilterSelector() {
-    for (let element of document.querySelector('.home-items').children) {
+    const filterElements = document.querySelector('.home-items').children
+    for (let element of filterElements) {
         element.classList.remove('selected')
     }
 }

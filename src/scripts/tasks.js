@@ -31,8 +31,7 @@ function newProject(projectName) {
 let selectedProject = ""
 const setSelectedProject = project => selectedProject = project
 const getSelectedProject = () => selectedProject
-let currentTasks = () => {
-}
+let currentTasks = () => {}
 const setCurrentTasks = task => currentTasks = task
 const getCurrentTasks = () => currentTasks()
 let selectedFilter = ""
@@ -47,6 +46,5 @@ function getAllTasks() {
             allTasks.push(task)
         })
     }
-
     return allTasks
 }

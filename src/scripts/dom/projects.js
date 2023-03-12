@@ -1,4 +1,4 @@
-export {renderProjects, configureAddProjectButton, renderProjectHeader}
+export {renderProjects, configureAddProjectButton, renderProjectHeader, configureNavButton}
 
 import {removeFilterSelector} from "./filters";
 import {renderContainer, renderTaskForm} from "./tasks";
@@ -13,6 +13,7 @@ import {
 } from "../tasks";
 
 const todoContainer = document.querySelector(".todo")
+
 
 function renderProjects() {
     const projectsArray = Object.keys(allProjects).map(project => {
@@ -53,6 +54,16 @@ function renderProjectHeader() {
     const container = document.createElement('div')
     container.append(projectTitle)
     return container
+}
+
+function configureNavButton() {
+    const navButton = document.querySelector('.nav-button')
+    const sidebar = document.querySelector('.sidebar')
+    navButton.addEventListener('click', () => {
+        sidebar.classList.contains('width-zero')
+            ? sidebar.classList.remove('width-zero')
+            : sidebar.classList.add('width-zero')
+    })
 }
 
 function configureAddProjectButton() {

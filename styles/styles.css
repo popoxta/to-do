@@ -50,7 +50,7 @@ h1 > span {
     color: var(--blue)
 }
 
-.navbar {
+.nav-button {
     height: 3rem;
     width: 3rem;
 }
@@ -71,20 +71,31 @@ h1 > span {
 .sidebar {
     background-color: var(--light-green);
 
-    min-width: 20rem;
-    min-height: calc(100vh - 5.5rem);
+    width: 20rem;
+    height: calc(100vh - 5.5rem);
 
     padding: 2rem;
+    overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
+    transition: width, padding-left, padding-right, 0.4s ease-in-out;
 }
 
 .sidebar h2 {
     color: var(--green-grey);
     font-size: 1.8rem;
+    text-wrap: none;
+    white-space: nowrap;
 
     margin: 0;
+}
+.sidebar h3 {
+    white-space: nowrap;
+}
+
+.width-zero {
+    width: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 h3 {

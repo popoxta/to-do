@@ -1,4 +1,4 @@
-export {selectTaskFilter, initializeAllFilters}
+export {selectTaskFilter, initializeAllFilters, removeFilterSelector}
 
 import {getAllTasks, setCurrentTasks, setSelectedFilter, setSelectedProject} from "../tasks";
 import {renderContainer} from "./tasks";
@@ -32,7 +32,7 @@ function selectTaskFilter(filterElement, tasks, header) {
     renderContainer()
 }
 
-export function removeFilterSelector() {
+function removeFilterSelector() {
     const filterElements = document.querySelector('.home-items').children
     for (let element of filterElements) {
         element.classList.remove('selected')

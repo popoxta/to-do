@@ -185,3 +185,6 @@ form > label:first-child {
 .selected {
     color: red;
 }
+.important-task {
+    color: cornflowerblue;
+}

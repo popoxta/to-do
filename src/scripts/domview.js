@@ -1,64 +1,19 @@
-export {renderProjects, configureAddProjectButton, initializeFilters}
-import {allProjects, newProject, Task} from "./tasks.js";
+import {removeFilterSelector} from "./filters";
 import {
-    setSelectedProject,
-    getSelectedProject,
-    setCurrentTasks,
+    allProjects,
     getCurrentTasks,
-    getAllTasks,
-    setSelectedFilter, getSelectedFilter
-} from "./todo.js";
+    getSelectedFilter,
+    getSelectedProject,
+    newProject,
+    setCurrentTasks,
+    setSelectedProject,
+    Task
+} from "./tasks.js";
+import {format, formatISO} from "date-fns";
 
-const projectSidebar = document.querySelector('.project-items')
+export {renderProjects, configureAddProjectButton, renderContainer}
+
 const todoContainer = document.querySelector(".todo")
-const filterSidebar = document.querySelector('.home-items')
-
-// allTasksFilter.addEventListener('click', ()=> {
-//
-// })
-
-function initializeFilters(){
-    const allTasksFilter = document.querySelector('.all')
-    allTasksFilter.addEventListener('click', () => {
-        onFilterClick(allTasksFilter, getAllTasks(), 'all tasks')
-    })
-
-
-    const todayTasksFilter = document.querySelector('.today')
-    todayTasksFilter.addEventListener('click', () => {
-        onFilterClick(todayTasksFilter, getAllTasks(), 'today')
-    })
-
-
-    const weekTasksFilter = document.querySelector('.week')
-    weekTasksFilter.addEventListener('click', () => {
-        onFilterClick(weekTasksFilter, getAllTasks(), 'this week')
-    })
-
-
-    const importantTasksFilter = document.querySelector('.important')
-    importantTasksFilter.addEventListener('click', () => {
-        onFilterClick(importantTasksFilter, getAllTasks(), 'important')
-    })
-
-}
-function onFilterClick(filterElement, tasks, header){
-    setSelectedProject('')
-    setSelectedFilter(header)
-    setCurrentTasks(tasks)
-
-    removeFilterSelector()
-    filterElement.className = 'selected'
-
-    renderProjects()
-    renderContainer()
-}
-
-function removeFilterSelector(){
-    for(let element of filterSidebar.children){
-        element.classList.remove('selected')
-    }
-}
 
 function renderProjects() {
     const projectsArray = Object.keys(allProjects).map(project => {
@@ -73,7 +28,7 @@ function renderProjects() {
         projectItem.addEventListener('click', () => {
             removeFilterSelector()
             setSelectedProject(project)
-            setCurrentTasks(allProjects[project])
+            setCurrentTasks(()=> allProjects[project])
             console.log(`now displaying .... ${project}`)
 
             renderProjects()
@@ -83,7 +38,7 @@ function renderProjects() {
         return projectItem
     })
 
-    projectSidebar.replaceChildren(...projectsArray)
+    document.querySelector('.project-items').replaceChildren(...projectsArray)
 }
 
 function buildTaskElement(task) {
@@ -97,18 +52,18 @@ function buildTaskElement(task) {
     const taskInfoFirstDiv = document.createElement('div')
     const checkBox = document.createElement('div')
     checkBox.className = 'check-box'
-    if (task.done === true) {
-        checkBox.classList.add('done')
-    }
+    if (task.done) checkBox.classList.add('done')
+
 
     const taskTitle = document.createElement('h4')
     taskTitle.textContent = task.name
+    if (task.important) taskTitle.classList.add('important-task')
     taskInfoFirstDiv.append(checkBox, taskTitle)
 
     const taskInfoSecondDiv = document.createElement('div')
     const taskDue = document.createElement('p')
 
-    taskDue.textContent = task.date ? `due ${task.date}` : ''
+    taskDue.textContent = task.date ? `due ${format(task.date, 'eee do LLL y')}` : ''
 
     const taskEdit = document.createElement('button')
     taskEdit.className = 'edit-btn'
@@ -253,10 +208,9 @@ function renderTaskForm(task) {
         formHeader.textContent = 'edit task'
         submitButton.textContent = 'confirm'
 
-        // todo fuck up intellij
         taskName.value = task.name
         description.value = task.description
-        dueDate.value = task.date
+        dueDate.value = !(task.date) ? null : formatISO(task.date, { representation: 'date' })
         important.checked = task.important
 
         taskForm.addEventListener('submit', e => {
@@ -282,7 +236,7 @@ function editTask(e, task) {
     const formData = new FormData(e.target)
     task.name = formData.get('taskName')
     task.description = formData.get('description')
-    task.date = formData.get('dueDate')
+    task.date = !formData.get('dueDate') ? null : new Date(formData.get('dueDate').toString())
     task.important = formData.get('important') === "on"
 }
 
@@ -292,7 +246,7 @@ function addTask(e) {
     const task = new Task(
         formData.get('taskName'),
         formData.get('description'),
-        formData.get('dueDate'),
+        !formData.get('dueDate') ? null : new Date(formData.get('dueDate').toString()),
         formData.get('important') === "on"
     )
     allProjects[getSelectedProject()].push(task)

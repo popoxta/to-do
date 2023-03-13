@@ -28,20 +28,18 @@ function buildTaskElement(task) {
     const taskInfoSecondDiv = document.createElement('div')
     const taskDue = document.createElement('p')
 
-    taskDue.textContent = task.date ? `due ${format(task.date, 'eee do LLL y')}` : ''
+    taskDue.textContent = task.date ? format(task.date, 'eee do LLL') : ''
 
     const taskEdit = document.createElement('button')
     taskEdit.className = 'edit-btn'
-    taskEdit.textContent = 'edit'
     taskInfoSecondDiv.append(taskDue, taskEdit)
 
     const taskInfo = document.createElement('div')
     taskInfo.className = 'task-info'
-    taskInfo.textContent = task.description
     const taskDescription = document.createElement('p')
+    taskDescription.textContent = task.description
     const taskDelete = document.createElement('button')
     taskDelete.className = 'delete-btn'
-    taskDelete.textContent = 'delete'
     taskInfo.append(taskDescription, taskDelete)
 
     taskDiv.append(taskInfoFirstDiv, taskInfoSecondDiv)
@@ -77,7 +75,7 @@ function deleteTask(task) {
 }
 
 function renderContainer() {
-
+    console.log(getCurrentTasks())
     const contentArray = getCurrentTasks().map(buildTaskElement)
 
     contentArray.unshift(renderProjectHeader())
@@ -111,6 +109,8 @@ function renderTaskForm(task) {
     taskName.id = 'taskName'
     taskName.name = 'taskName'
     taskName.placeholder = 'name'
+    taskName.maxLength = 25
+    taskName.required = true
 
     const descriptionLabel = document.createElement('label')
     descriptionLabel.htmlFor = 'description'
@@ -119,6 +119,8 @@ function renderTaskForm(task) {
     description.id = 'description'
     description.name = 'description'
     description.placeholder = 'description'
+    description.style.resize = 'none'
+    description.maxLength = 50
 
     const dueDateLabel = document.createElement('label')
     dueDateLabel.htmlFor = 'dueDate'

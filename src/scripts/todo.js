@@ -1,11 +1,10 @@
 import {configureAddProjectButton, renderProjects, configureNavButton} from "./dom/projects";
-import {getAllTasks, loadStoredProjects} from "./tasks";
-import {initializeAllFilters, selectTaskFilter} from "./dom/filters";
+import {loadStoredProjects} from "./tasks";
+import {initializeAllFilters, viewDefault} from "./dom/filters";
 
 loadStoredProjects()
 renderProjects()
 configureAddProjectButton()
 configureNavButton()
 initializeAllFilters()
-selectTaskFilter(document.querySelector('.all'), () => getAllTasks(), 'all tasks')
-
+viewDefault()

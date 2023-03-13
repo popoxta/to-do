@@ -1,9 +1,11 @@
-export {selectTaskFilter, initializeAllFilters, removeFilterSelector}
+export {selectTaskFilter, initializeAllFilters, removeFilterSelector, viewDefault}
 
 import {getAllTasks, setCurrentTasks, setSelectedFilter, setSelectedProject} from "../tasks";
 import {renderContainer} from "./tasks";
 import {isThisWeek, isToday} from "date-fns";
 import {renderProjects} from "./projects";
+
+const allFilter = document.querySelector('.all')
 
 function initializeAllFilters() {
 
@@ -37,4 +39,8 @@ function removeFilterSelector() {
     for (let element of filterElements) {
         element.classList.remove('selected')
     }
+}
+
+function viewDefault(){
+    selectTaskFilter(allFilter, () => getAllTasks(), 'all tasks')
 }

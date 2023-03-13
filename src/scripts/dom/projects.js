@@ -1,6 +1,6 @@
 export {renderProjects, configureAddProjectButton, renderProjectHeader, configureNavButton}
 
-import {removeFilterSelector} from "./filters";
+import {removeFilterSelector, selectTaskFilter, viewDefault} from "./filters";
 import {renderContainer, renderTaskForm} from "./tasks";
 import {
     allProjects,
@@ -9,7 +9,7 @@ import {
     getSelectedProject,
     newProject,
     setCurrentTasks,
-    setSelectedProject
+    setSelectedProject, getAllTasks
 } from "../tasks";
 
 const todoContainer = document.querySelector(".todo")
@@ -24,10 +24,10 @@ function renderProjects() {
         if (project === getSelectedProject()) projectItem.className = 'selected'
 
         const deleteButton = document.createElement('button')
-        deleteButton.textContent = 'delete'
+        deleteButton.textContent = ''
         projectItem.appendChild(deleteButton)
 
-        deleteButton.addEventListener('click', () => deleteProject(project))
+        deleteButton.addEventListener('click', e => deleteProject(project, e))
         projectItem.addEventListener('click', () => openProject(project))
         return projectItem
     })
@@ -41,7 +41,6 @@ function renderProjectHeader() {
     projectTitle.textContent = getSelectedProject()
 
         const addTask = document.createElement('button')
-        addTask.textContent = 'add task'
         addTask.addEventListener('click', () => {
             renderTaskForm()
         })
@@ -92,6 +91,7 @@ function renderProjectForm() {
     projectName.type = 'text'
     projectName.id = 'projectName'
     projectName.name = 'projectName'
+    projectName.maxLength = 10
     projectName.required = true
 
     const submitButton = document.createElement('button')
@@ -131,12 +131,18 @@ function renderProjectForm() {
     todoContainer.appendChild(projectForm)
 }
 
-function deleteProject(project){
+function deleteProject(project, e){
+    e.stopPropagation()
     if (!confirm(`Are you sure you would like to delete ${project}?`)) return
 
     delete allProjects[project]
-    renderProjects()
-    renderContainer()
+
+    if(project === getSelectedProject()){
+        viewDefault()
+    } else {
+        renderProjects()
+        renderContainer()
+    }
     updateLocalStorage()
 }
 

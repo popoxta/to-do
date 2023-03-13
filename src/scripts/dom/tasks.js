@@ -132,13 +132,14 @@ function renderTaskForm(task) {
 
     const importantLabel = document.createElement('label')
     importantLabel.htmlFor = 'important'
-    importantLabel.className = 'center'
     importantLabel.textContent = 'mark important'
     const important = document.createElement('input')
     important.type = 'checkbox'
     important.id = 'important'
     important.name = 'important'
     importantLabel.appendChild(important)
+
+    const buttonDiv = document.createElement('div')
 
     const submitButton = document.createElement('button')
     submitButton.textContent = 'add'
@@ -147,6 +148,8 @@ function renderTaskForm(task) {
     const cancelButton = document.createElement('button')
     cancelButton.textContent = 'cancel'
     cancelButton.addEventListener('click', () => todoContainer.removeChild(taskForm))
+
+    buttonDiv.append(submitButton, cancelButton)
 
     if (task) { // if task is passed as argument ( e.g. edit )
         formHeader.textContent = 'edit task'
@@ -171,7 +174,7 @@ function renderTaskForm(task) {
     }
 
     form.append(taskNameLabel, taskName, descriptionLabel, description, dueDateLabel, dueDate, importantLabel,
-        submitButton, cancelButton)
+        buttonDiv)
     taskForm.append(formHead, form)
 
     todoContainer.appendChild(taskForm)

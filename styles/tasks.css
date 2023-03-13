@@ -1,0 +1,100 @@
+.todo {
+    background-color: white;
+
+    max-height: calc(100vh - 5.5rem);
+    padding: 2rem;
+    overflow-y: auto;
+
+    flex: 1;
+}
+
+.todo h2 {
+    color: var(--black-blue);
+    margin-bottom: 1rem;
+
+    white-space: nowrap;
+}
+
+.add-project, .todo h2 > button {
+    background-color: var(--dark-green);
+    mask-image: url("./images/plus-circle-outline.svg");
+    -webkit-mask-image: url("./images/plus-circle-outline.svg");
+
+    content: "";
+    min-width: 1.8rem;
+    height: 1.8rem;
+
+    transition: scale 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.task-container {
+    background-color: var(--light-green);
+    border-radius: 10px;
+
+    width: min(75%, 60rem);
+    min-width: 30rem;
+
+    margin: 0 auto 2rem;
+    padding: 1rem;
+}
+
+.task, .task-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    word-wrap: anywhere;
+}
+
+.task-info {
+    padding-top: 1rem;
+    padding-left: 3rem;
+}
+
+.task > div:first-child, .task > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.check-box {
+    background-color: var(--green);
+    border-radius: 30px;
+
+    min-width: 2rem;
+    height: 2rem;
+
+    cursor: pointer;
+}
+
+.done::after {
+    color: var(--black-blue);
+    font-size: 1.5rem;
+
+    content: "✔";
+    margin-left: 0.4rem;
+}
+
+.important-task::before {
+    content: "! ";
+    color: var(--blue);
+}
+
+.edit-btn, .delete-btn {
+    background-color: var(--black-blue);
+    mask-image: url("./images/pencil-outline.svg");
+    -webkit-mask-image: url("./images/pencil-outline.svg");
+
+    content: "";
+    min-width: 1.8rem;
+    height: 1.8rem;
+
+    transition: scale 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.delete-btn {
+    mask-image: url("./images/trash-can-outline.svg");
+    -webkit-mask-image: url("./images/trash-can-outline.svg");
+}

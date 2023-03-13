@@ -71,6 +71,9 @@ function configureAddProjectButton() {
 }
 
 function renderProjectForm() {
+    const prevForm = document.querySelector('.form-body')
+    if (prevForm) todoContainer.removeChild(prevForm)
+
     const projectForm = document.createElement('div')
     projectForm.className = 'form-body'
 
@@ -94,12 +97,16 @@ function renderProjectForm() {
     projectName.maxLength = 10
     projectName.required = true
 
+    const buttonDiv = document.createElement('div')
+
     const submitButton = document.createElement('button')
     submitButton.textContent = 'add'
     submitButton.type = 'submit'
 
     const cancelButton = document.createElement('button')
     cancelButton.textContent = 'cancel'
+
+    buttonDiv.append(submitButton, cancelButton)
 
     function removeForm() {
         todoContainer.removeChild(projectForm)
@@ -125,7 +132,7 @@ function renderProjectForm() {
         updateLocalStorage()
     })
 
-    form.append(projectNameLabel, projectName, submitButton, cancelButton)
+    form.append(projectNameLabel, projectName, buttonDiv)
     projectForm.append(formHead, form)
 
     todoContainer.appendChild(projectForm)

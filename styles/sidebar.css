@@ -1,0 +1,106 @@
+.sidebar {
+    background-color: var(--light-green);
+
+    width: 20rem;
+    min-height: calc(100vh - 5.5rem);
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    transition: width 0.4s ease-in-out;
+}
+
+.width-zero {
+    width: 0;
+}
+
+.selected {
+    color: var(--blue);
+}
+
+.sidebar h3 {
+    font-size: 1.2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    cursor: pointer;
+    transition: color 0.1s ease-in-out;
+}
+
+.sidebar h3:hover {
+    color: var(--blue);
+}
+
+.sidebar h3::before {
+    background-color: var(--black-blue);
+    mask-image: url("./images/calendar-heart-outline.svg");
+    -webkit-mask-image: url("./images/calendar-heart-outline.svg");
+
+    content: "";
+    min-width: 1.5rem;
+    height: 1.5rem;
+}
+
+.side-home h3:first-child::before {
+    mask-image: url("./images/calendar-month-outline.svg");
+    -webkit-mask-image: url("./images/calendar-month-outline.svg");
+}
+
+.side-home h3:nth-child(2)::before {
+    mask-image: url("./images/calendar-badge-outline.svg");
+    -webkit-mask-image: url("./images/calendar-badge-outline.svg");
+}
+
+.side-home h3:nth-child(3)::before {
+    mask-image: url("./images/calendar-range-outline.svg");
+    -webkit-mask-image: url("./images/calendar-range-outline.svg");
+}
+
+.side-home h3:nth-child(4)::before {
+    mask-image: url("./images/calendar-alert-outline.svg");
+    -webkit-mask-image: url("./images/calendar-alert-outline.svg");
+}
+
+.side-home h3:last-child::before {
+    mask-image: url("./images/calendar-check-outline.svg");
+    -webkit-mask-image: url("./images/calendar-check-outline.svg");
+}
+
+.side-home, .side-projects {
+    position: relative;
+    margin: 2rem;
+}
+
+.side-home > .underline, .side-projects > .underline {
+    top: 3rem;
+    left: 0;
+
+    height: 0.2rem;
+    width: 11rem;
+}
+
+.side-projects h3 > button {
+    background-color: var(--green);
+    border: none;
+
+    mask-image: url("./images/delete-circle-outline.svg");
+    -webkit-mask-image: url("./images/delete-circle-outline.svg");
+
+    width: 1.5rem;
+    height: 1.5rem;
+
+    transition: scale 0.1s ease-in-out;
+    cursor: pointer;
+}
+
+.add-project:hover, .todo h2 > button:hover, .edit-btn:hover, .delete-btn:hover {
+    scale: 1.1;
+    background-color: var(--blue);
+}
+
+.side-projects h3 > button:hover {
+    scale: 1.1;
+    background-color: var(--dark-green);
+}

@@ -63,8 +63,8 @@ span {
 
 .nav-button {
     border: none;
-    mask-image: url("./images/menu.svg");
-    -webkit-mask-image: url("./images/menu.svg");
+    mask-image: url("images/menu.svg");
+    -webkit-mask-image: url("images/menu.svg");
     background-color: var(--black-blue);
 
     height: 3rem;

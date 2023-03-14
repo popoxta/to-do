@@ -1,16 +1,11 @@
+import {ta} from "date-fns/locale";
+
 export {
-    allProjects,
-    updateLocalStorage,
-    loadStoredProjects,
-    newProject,
-    Task,
-    getAllTasks,
-    getCurrentTasks,
-    setCurrentTasks,
-    getSelectedProject,
-    setSelectedProject,
-    getSelectedFilter,
-    setSelectedFilter
+    allProjects, newProject,
+    updateLocalStorage, loadStoredProjects,
+    Task, getAllTasks, getCurrentTasks, setCurrentTasks,
+    getSelectedProject, setSelectedProject,
+    getSelectedFilter, setSelectedFilter
 };
 
 let allProjects = {}
@@ -24,18 +19,10 @@ function loadStoredProjects() {
     if (!storedProjects) {
         createDefaultProjects()
         updateLocalStorage()
-    } else {
-        for (let key of Object.keys(storedProjects)) {
-            allProjects[key] = storedProjects[key].map(task => {
-                return new Task(
-                    task.name,
-                    task.description,
-                    task.date ? new Date(task.date) : null,
-                    task.important,
-                    task.done,
-                )
-            })
-        }
+        return
+    }
+    for (let key of Object.keys(storedProjects)) {
+        allProjects[key] = storedProjects[key].map(createTaskFromJSON)
     }
 }
 
@@ -49,9 +36,18 @@ class Task {
     }
 }
 
+function createTaskFromJSON(task) {
+    return new Task(
+        task.name,
+        task.description,
+        task.date ? new Date(task.date) : null,
+        task.important,
+        task.done,
+    )
+}
+
 function getAllTasks() {
     let allTasks = []
-
     for (let key of Object.keys(allProjects)) {
         allProjects[key].forEach(task => {
             allTasks.push(task)
@@ -68,9 +64,11 @@ function newProject(projectName) {
 let selectedProject = ""
 const setSelectedProject = project => selectedProject = project
 const getSelectedProject = () => selectedProject
+
 let currentTasks = () => {}
 const setCurrentTasks = task => currentTasks = task
 const getCurrentTasks = () => currentTasks()
+
 let selectedFilter = ""
 const setSelectedFilter = filter => selectedFilter = filter
 const getSelectedFilter = () => selectedFilter

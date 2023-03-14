@@ -134,7 +134,6 @@ function renderProjectForm() {
 
     form.append(projectNameLabel, projectName, buttonDiv)
     projectForm.append(formHead, form)
-
     todoContainer.appendChild(projectForm)
 }
 

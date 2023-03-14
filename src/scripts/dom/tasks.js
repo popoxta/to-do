@@ -19,7 +19,6 @@ function buildTaskElement(task) {
     checkBox.className = 'check-box'
     if (task.done) checkBox.classList.add('done')
 
-
     const taskTitle = document.createElement('h4')
     taskTitle.textContent = task.name
     if (task.important) taskTitle.classList.add('important-task')
@@ -27,7 +26,6 @@ function buildTaskElement(task) {
 
     const taskInfoSecondDiv = document.createElement('div')
     const taskDue = document.createElement('p')
-
     taskDue.textContent = task.date ? format(task.date, 'eee do LLL') : ''
 
     const taskEdit = document.createElement('button')
@@ -43,9 +41,7 @@ function buildTaskElement(task) {
     taskInfo.append(taskDescription, taskDelete)
 
     taskDiv.append(taskInfoFirstDiv, taskInfoSecondDiv)
-
     taskContainer.append(taskDiv, taskInfo)
-
 
     checkBox.addEventListener('click', () => {
         task.done = !task.done
@@ -54,7 +50,6 @@ function buildTaskElement(task) {
     })
 
     taskEdit.addEventListener('click', () => renderTaskForm(task))
-
     taskDelete.addEventListener('click', () => deleteTask(task))
 
     return taskContainer
@@ -157,7 +152,9 @@ function renderTaskForm(task) {
 
         taskName.value = task.name
         description.value = task.description
-        dueDate.value = !(task.date) ? null : formatISO(task.date, {representation: 'date'})
+        dueDate.value = task.date
+            ? formatISO(task.date, {representation: 'date'})
+            : null
         important.checked = task.important
 
         taskForm.addEventListener('submit', e => {
@@ -173,10 +170,8 @@ function renderTaskForm(task) {
         })
     }
 
-    form.append(taskNameLabel, taskName, descriptionLabel, description, dueDateLabel, dueDate, importantLabel,
-        buttonDiv)
+    form.append(taskNameLabel, taskName, descriptionLabel, description, dueDateLabel, dueDate, importantLabel, buttonDiv)
     taskForm.append(formHead, form)
-
     todoContainer.appendChild(taskForm)
 }
 
@@ -185,7 +180,7 @@ function editTask(e, task) {
     const formData = new FormData(e.target)
     task.name = formData.get('taskName')
     task.description = formData.get('description')
-    task.date = !formData.get('dueDate') ? null : new Date(formData.get('dueDate').toString())
+    task.date = createDate(formData.get('dueDate'))
     task.important = formData.get('important') === "on"
 }
 
@@ -195,8 +190,14 @@ function addTask(e) {
     const task = new Task(
         formData.get('taskName'),
         formData.get('description'),
-        !formData.get('dueDate') ? null : new Date(formData.get('dueDate').toString()),
+        createDate(formData.get('dueDate')),
         formData.get('important') === "on"
     )
     allProjects[getSelectedProject()].push(task)
+}
+
+function createDate(date){
+    return date
+        ? new Date(date.toString())
+        : null
 }

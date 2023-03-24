@@ -1,5 +1,3 @@
-import {ta} from "date-fns/locale";
-
 export {
     allProjects, newProject,
     updateLocalStorage, loadStoredProjects,
